@@ -25,3 +25,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.xtended.display.version=$(XTENDED_DISPLAY_VERSION) \
     com.xtended.fingerprint=$(ROM_FINGERPRINT)
 
+ifdef XTENDED_OFFICIAL
+   LIST = $(shell cat vendor/xtended/xtended.devices | awk '$$1 != "#" { print $$2 }')
+   FOUND_DEVICE =  $(filter $(CURRENT_DEVICE), $(LIST))
+    ifeq ($(FOUND_DEVICE),$(CURRENT_DEVICE))
+      IS_OFFICIAL=true
+      XTENDED_BUILD_TYPE := OFFICIAL
+
+PRODUCT_PACKAGES += \
+    Updater
+
+    endif
+    ifneq ($(IS_OFFICIAL), true)
+       XTENDED_BUILD_TYPE := UNOFFICIAL
+       $(error Device is not official "$(FOUND)")
+    endif
+endif
