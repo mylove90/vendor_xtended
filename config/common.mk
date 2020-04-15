@@ -120,7 +120,6 @@ PRODUCT_COPY_FILES += \
 
 # This is Xtended!
 PRODUCT_COPY_FILES += \
-   vendor/xtended/config/permissions/privapp-permissions-google_prebuilt.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-google_prebuilt.xml \
    vendor/xtended/config/permissions/privapp-permissions-xtended-product.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-xtended.xml \
    vendor/xtended/config/permissions/privapp-permissions-xtended-system.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-xtended.xml
 
@@ -131,7 +130,6 @@ PRODUCT_COPY_FILES += \
 # Power whitelist
 PRODUCT_COPY_FILES += \
     vendor/xtended/config/permissions/xtended-power-whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/xtended-power-whitelist.xml \
-    vendor/xtended/config/permissions/qti_whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/qti_whitelist.xml
 
 # Include AOSP audio files
 include vendor/xtended/config/aosp_audio.mk
@@ -160,12 +158,6 @@ PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 
 # Disable vendor restrictions
 PRODUCT_RESTRICT_VENDOR_FILES := false
-
-#Xtended OTA Support
-ifeq ($(XTENDED_BUILD_TYPE), OFFICIAL)
-PRODUCT_PACKAGES += \
-    Updater
-endif
 
 # Xtended packages
 PRODUCT_PACKAGES += \
@@ -267,9 +259,6 @@ PRODUCT_PACKAGES += \
     su
 endif
 endif
-
-# easy way to extend to add more packages
--include vendor/extra/product.mk
 
 PRODUCT_PACKAGES += \
     AndroidDarkThemeOverlay \
